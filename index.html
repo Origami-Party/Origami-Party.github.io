@@ -1,9 +1,29 @@
-<html>
-    <head>
-       <meta charset="utf-8">
-    </head>
-    <body >
-       <h1>My Deep Link Test page</h1>
-       <p><a href="jpclash://gotoclash?lobby=GJHNHJ">Launch</a></p>       
-    </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrando na partida...</title>
+    <script>
+        window.onload = function() {
+            // Pega os parâmetros da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const lobbyCode = urlParams.get('lobby');
+
+            if (lobbyCode) {
+                // Monta o deep link com o código de lobby vindo da URL
+                window.location.href = `jpclash://gotoclash?lobby=${lobbyCode}`;
+
+                // Fallback opcional
+                setTimeout(function() {
+                    window.location.href = "https://seuprojeto.github.io/jokenpo-lobbies/fallback.html";
+                }, 3000);
+            } else {
+                document.body.innerHTML = "<p>Código da sala não informado.</p>";
+            }
+        }
+    </script>
+</head>
+<body>
+    <p>Se não for redirecionado, <a id="deeplink" href="#">clique aqui</a>.</p>
+</body>
 </html>
